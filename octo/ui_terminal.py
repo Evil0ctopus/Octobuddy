@@ -1,66 +1,93 @@
+import os
 import time
-import random
+from colorama import Fore, Style, init
 
+init(autoreset=True)
+
+# ---------------------------------------------------------
+# ASCII faces by mood (hybrid cute + hacker)
+# ---------------------------------------------------------
+FACES = {
+    "sleepy": "( -.- ) zZ",
+    "curious": "( o.O )",
+    "hyper": "( ^o^ )/",
+    "goofy": "( @v@ )",
+    "chaotic": "( >:D )",
+    "proud": "( ^‿^ )",
+    "confused": "( ?_? )",
+    "excited": "( ^O^ )!!",
+}
+
+# Default fallback
+DEFAULT_FACE = "( ^~^ )"
+
+
+# ---------------------------------------------------------
+# XP BAR (cyber‑style)
+# ---------------------------------------------------------
+def xp_bar(xp, level, config):
+    # Find next level threshold
+    levels = sorted(config["xp_levels"], key=lambda x: x["threshold"])
+    current = next((lv for lv in levels if lv["level"] == level), None)
+    next_lv = next((lv for lv in levels if lv["level"] == level + 1), None)
+
+    if not next_lv:
+        return "[ MAX LEVEL ]"
+
+    min_xp = current["threshold"]
+    max_xp = next_lv["threshold"]
+
+    progress = (xp - min_xp) / (max_xp - min_xp)
+    progress = max(0, min(progress, 1))
+
+    filled = int(progress * 20)
+    empty = 20 - filled
+
+    return "[" + Fore.GREEN + "#" * filled + Style.RESET_ALL + "-" * empty + "]"
+
+
+# ---------------------------------------------------------
+# CLEAR SCREEN
+# ---------------------------------------------------------
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+# ---------------------------------------------------------
+# MAIN RENDER FUNCTION
+# ---------------------------------------------------------
 def render(state, mood, stage, phrase):
-    face = build_face(mood, stage)
+    clear()
 
-    print("=" * 40)
+    xp = state.get("xp", 0)
+    level = state.get("level", 1)
 
-    # 20% chance to animate the face
-    if random.random() < 0.20:
-        animate_face(face)
-    else:
-        print(face)
+    face = FACES.get(mood, DEFAULT_FACE)
 
-    print(f"Name : {state.get('name', 'OctoBuddy')}")
-    print(f"XP   : {state.get('xp', 0)}")
-    print(f"Level: {state.get('level', 1)}")
-    print(f"Stage: {stage}")
-    print(f"Mood : {mood}")
-    print("-" * 40)
-    print(phrase)
-    print("=" * 40)
+    # Cyber frame
+    print(Fore.CYAN + "========================================")
+    print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
+    print(Fore.CYAN + "========================================" + Style.RESET_ALL)
 
+    # Creature display
+    print(Fore.GREEN + f"   {face}")
+    print(Fore.GREEN + f"   Stage : {stage}")
+    print(Fore.GREEN + f"   Mood  : {mood}")
+    print()
 
-def animate_face(face):
-    animations = [
-        [face, face.replace("(", "(~"), face.replace(")", "~)")],  # wiggle
-        [face, face.replace("•", "o"), face],  # blink
-        [face, face + " ✨", face],  # sparkle
-    ]
+    # XP bar
+    print(Fore.YELLOW + f"XP   : {xp}")
+    print(Fore.YELLOW + f"Level: {level}")
+    print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, state['config'])}")
+    print()
 
-    frames = random.choice(animations)
+    # Divider
+    print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
 
-    for f in frames:
-        print("\r" + f, end="")
-        time.sleep(0.15)
+    # Phrase
+    print(Fore.WHITE + phrase)
+    print(Fore.CYAN + "========================================" + Style.RESET_ALL)
 
-    print()  # move to next line
-
-
-def build_face(mood, stage):
-    # Stage-based overrides
-    if stage == "Baby":
-        return "(•ᴗ•)ﾉ"
-    if stage == "Learner":
-        return "(^o^)/"
-    if stage == "Chaotic Gremlin":
-        return "(>_<)🔥"
-    if stage == "Analyst":
-        return "(•̀ᴗ•́)و"
-    if stage == "Fully Evolved Hybrid":
-        return "＼(≧▽≦)／✨"
-
-    # Fallback to mood-based faces
-    faces = {
-        "sleepy": "(-_-) zZ",
-        "curious": "(o_O)?",
-        "hyper": "(^o^)/!!!",
-        "goofy": "(ᵔᴥᵔ)",
-        "chaotic": "(>_<)🔥",
-        "proud": "(•̀ᴗ•́)و ̑̑",
-        "confused": "(⊙_☉)",
-        "excited": "＼(≧▽≦)／",
-    }
-    return faces.get(mood, "(•_•)")
+    # Small wiggle animation
+    time.sleep(0.1)
 
