@@ -11,10 +11,15 @@ def render(state, mood, phrase):
     print("=" * 40)
 
 def build_face(mood):
-    if mood == "sleepy":
-        return "(-_-) zZ"
-    if mood == "curious":
-        return "(o_O)?"
-    if mood == "hyper":
-        return "(^o^)/!!!"
-    return "(•_•)"
+    faces = {
+        "sleepy": "(-_-) zZ",
+        "curious": "(o_O)?",
+        "hyper": "(^o^)/!!!",
+        "goofy": "(ᵔᴥᵔ)",
+        "chaotic": "(>_<)🔥",
+        "proud": "(•̀ᴗ•́)و ̑̑",
+        "confused": "(⊙_☉)",
+        "excited": "＼(≧▽≦)／",
+    }
+    return faces.get(mood, "(•_•)")
+
