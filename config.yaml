@@ -45,3 +45,23 @@ moods:
     min_xp: 1200
     max_xp: 999999
 
+stages:
+  - name: "Baby"
+    min_xp: 0
+    max_xp: 100
+
+  - name: "Learner"
+    min_xp: 100
+    max_xp: 300
+
+  - name: "Chaotic Gremlin"
+    min_xp: 300
+    max_xp: 600
+
+  - name: "Analyst"
+    min_xp: 600
+    max_xp: 1000
+
+  - name: "Fully Evolved Hybrid"
+    min_xp: 1000
+    max_xp: 999999
