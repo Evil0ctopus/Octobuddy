@@ -31,6 +31,7 @@ class OctoBuddy:
         # Normal event reaction
         phrase = get_phrase_for_event(event_type, self.state, mood, stage)
 
-        render(self.state, mood, stage, phrase)
+        render(self.state | {"config": self.config}, mood, stage, phrase)
+
 
         save_state(self.state)
