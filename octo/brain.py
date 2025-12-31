@@ -1,3 +1,5 @@
+import random
+
 def update_state_from_event(state, event_type, data, config):
     state = dict(state)  # shallow copy
 
@@ -19,21 +21,26 @@ def update_state_from_event(state, event_type, data, config):
 
 def get_mood(state, config):
     xp = state.get("xp", 0)
+
+    # Normal mood selection
     for mood in config["moods"]:
         if mood["min_xp"] <= xp < mood["max_xp"]:
-            return mood["name"]
-    return "hyper"
+            selected_mood = mood["name"]
+            break
+    else:
+        selected_mood = "hyper"
+
+    # Random mood swing (5% chance)
+    if random.random() < 0.05:
+        return random.choice([m["name"] for m in config["moods"]])
+
+    return selected_mood
 
 
-# ⭐ ADD THIS NEW FUNCTION BELOW
 def get_stage(state, config):
     xp = state.get("xp", 0)
     for stage in config.get("stages", []):
         if stage["min_xp"] <= xp < stage["max_xp"]:
             return stage["name"]
-
-    # Small chance of a random mood swing
-if random.random() < 0.05:  # 5% chance
-    return random.choice([m["name"] for m in config["moods"]])
 
     return "Unknown"
