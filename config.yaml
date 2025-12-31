@@ -8,3 +8,56 @@ xp_system:
   base_xp: 50
   multiplier: 2
 
+moods:
+  - name: "sleepy"
+    min_xp: 0
+    max_xp: 40
+
+  - name: "curious"
+    min_xp: 40
+    max_xp: 120
+
+  - name: "hyper"
+    min_xp: 120
+    max_xp: 250
+
+  - name: "goofy"
+    min_xp: 250
+    max_xp: 400
+
+  - name: "chaotic"
+    min_xp: 400
+    max_xp: 650
+
+  - name: "proud"
+    min_xp: 650
+    max_xp: 900
+
+  - name: "confused"
+    min_xp: 900
+    max_xp: 1200
+
+  - name: "excited"
+    min_xp: 1200
+    max_xp: 999999
+
+stages:
+  - name: "Baby"
+    min_xp: 0
+    max_xp: 100
+
+  - name: "Learner"
+    min_xp: 100
+    max_xp: 300
+
+  - name: "Chaotic Gremlin"
+    min_xp: 300
+    max_xp: 600
+
+  - name: "Analyst"
+    min_xp: 600
+    max_xp: 1000
+
+  - name: "Fully Evolved Hybrid"
+    min_xp: 1000
+    max_xp: 999999
