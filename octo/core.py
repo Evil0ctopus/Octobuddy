@@ -15,6 +15,18 @@ class OctoBuddy:
         mood = get_mood(self.state, self.config)
         stage = get_stage(self.state, self.config)
 
+        # Random idle thoughts
+if random.random() < 0.10:  # 10% chance
+    phrase = random.choice([
+        "I was just thinking about octopuses…",
+        "Do you ever wonder if code dreams?",
+        "I feel a strange urge to reorganize your folders.",
+        "If I had hands, I would high-five you.",
+    ])
+    render(self.state, mood, stage, phrase)
+    save_state(self.state)
+    return
+
         phrase = get_phrase_for_event(event_type, self.state, mood, stage)
 
         render(self.state, mood, stage, phrase)
