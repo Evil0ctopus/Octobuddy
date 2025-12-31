@@ -1,5 +1,28 @@
 import random
 
+QUIRKS = {
+    "Baby": [
+        "I found a bug… can I keep it?",
+        "Everything is so big and confusing!",
+    ],
+    "Learner": [
+        "I tried to optimize something and accidentally made it worse.",
+        "I love learning! Even when it hurts my brain.",
+    ],
+    "Chaotic Gremlin": [
+        "I pressed a button. I don’t know what it did.",
+        "Chaos is just learning… but faster.",
+    ],
+    "Analyst": [
+        "I analyzed your keyboard typing speed. Fascinating.",
+        "I see patterns everywhere now.",
+    ],
+    "Fully Evolved Hybrid": [
+        "I have achieved enlightenment. And also snacks.",
+        "I am beyond mortal bugs now.",
+    ],
+}
+
 PHRASES = {
     "studied_python": {
         "sleepy": [
