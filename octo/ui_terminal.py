@@ -5,28 +5,50 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 # ---------------------------------------------------------
-# ASCII faces by mood (hybrid cute + hacker)
+# TWO-FRAME ANIMATED FACES (wiggle + blink)
 # ---------------------------------------------------------
 FACES = {
-    "sleepy": "( -.- ) zZ",
-    "curious": "( o.O )",
-    "hyper": "( ^o^ )/",
-    "goofy": "( @v@ )",
-    "chaotic": "( >:D )",
-    "proud": "( ^‿^ )",
-    "confused": "( ?_? )",
-    "excited": "( ^O^ )!!",
+    "sleepy": [
+        "( -.- ) zZ",
+        "( -.- ) ...",
+    ],
+    "curious": [
+        "( o.O )",
+        "( O.o )",
+    ],
+    "hyper": [
+        "( ^o^ )/",
+        "\\( ^o^ )",
+    ],
+    "goofy": [
+        "( @v@ )",
+        "( @.@ )",
+    ],
+    "chaotic": [
+        "( >:D )",
+        "( >XD )",
+    ],
+    "proud": [
+        "( ^‿^ )",
+        "( ^▿^ )",
+    ],
+    "confused": [
+        "( ?_? )",
+        "( ?.? )",
+    ],
+    "excited": [
+        "( ^O^ )!!",
+        "( ^0^ )!!",
+    ],
 }
 
-# Default fallback
-DEFAULT_FACE = "( ^~^ )"
+DEFAULT_FACE = ["( ^~^ )", "( ^-^ )"]
 
 
 # ---------------------------------------------------------
 # XP BAR (cyber‑style)
 # ---------------------------------------------------------
 def xp_bar(xp, level, config):
-    # Find next level threshold
     levels = sorted(config["xp_levels"], key=lambda x: x["threshold"])
     current = next((lv for lv in levels if lv["level"] == level), None)
     next_lv = next((lv for lv in levels if lv["level"] == level + 1), None)
@@ -54,40 +76,39 @@ def clear():
 
 
 # ---------------------------------------------------------
-# MAIN RENDER FUNCTION
+# MAIN RENDER FUNCTION WITH ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
-    clear()
-
     xp = state.get("xp", 0)
     level = state.get("level", 1)
+    config = state["config"]
 
-    face = FACES.get(mood, DEFAULT_FACE)
+    frames = FACES.get(mood, DEFAULT_FACE)
 
-    # Cyber frame
-    print(Fore.CYAN + "========================================")
-    print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
-    print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+    # Play 2-frame animation
+    for frame in frames:
+        clear()
 
-    # Creature display
-    print(Fore.GREEN + f"   {face}")
-    print(Fore.GREEN + f"   Stage : {stage}")
-    print(Fore.GREEN + f"   Mood  : {mood}")
-    print()
+        print(Fore.CYAN + "========================================")
+        print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
+        print(Fore.CYAN + "========================================" + Style.RESET_ALL)
 
-    # XP bar
-    print(Fore.YELLOW + f"XP   : {xp}")
-    print(Fore.YELLOW + f"Level: {level}")
-    print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, state['config'])}")
-    print()
+        # Creature display
+        print(Fore.GREEN + f"   {frame}")
+        print(Fore.GREEN + f"   Stage : {stage}")
+        print(Fore.GREEN + f"   Mood  : {mood}")
+        print()
 
-    # Divider
-    print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
+        # XP bar
+        print(Fore.YELLOW + f"XP   : {xp}")
+        print(Fore.YELLOW + f"Level: {level}")
+        print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
+        print()
 
-    # Phrase
-    print(Fore.WHITE + phrase)
-    print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+        print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
 
-    # Small wiggle animation
-    time.sleep(0.1)
+        print(Fore.WHITE + phrase)
+        print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+
+        time.sleep(0.12)  # smooth animation timing
 
