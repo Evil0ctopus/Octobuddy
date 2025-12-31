@@ -1,3 +1,5 @@
+import time
+import random
 def render(state, mood, stage, phrase):
     face = build_face(mood, stage)
     print("=" * 40)
