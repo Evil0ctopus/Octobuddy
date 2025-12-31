@@ -27,6 +27,21 @@ def build_face(mood, stage):
     if stage == "Fully Evolved Hybrid":
         return "＼(≧▽≦)／✨"
 
+    def animate_face(face):
+    animations = [
+        [face, face.replace("(", "(~"), face.replace(")", "~)")],  # wiggle
+        [face, face.replace("•", "o"), face],  # blink
+        [face, face + " ✨", face],  # sparkle
+    ]
+
+    frames = random.choice(animations)
+
+    for f in frames:
+        print("\r" + f, end="")
+        time.sleep(0.15)
+
+    print()  # move to next line
+
     # Fallback to mood-based faces
     faces = {
         "sleepy": "(-_-) zZ",
