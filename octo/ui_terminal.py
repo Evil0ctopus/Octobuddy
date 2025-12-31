@@ -44,6 +44,19 @@ FACES = {
 
 DEFAULT_FACE = ["( ^~^ )", "( ^-^ )"]
 
+# ---------------------------------------------------------
+# MOOD-BASED ANIMATION LENGTH
+# ---------------------------------------------------------
+ANIMATION_LENGTH = {
+    "sleepy": 2,
+    "curious": 4,
+    "hyper": 8,
+    "goofy": 4,
+    "chaotic": 10,
+    "proud": 4,
+    "confused": 3,
+    "excited": 8,
+}
 
 # ---------------------------------------------------------
 # XP BAR (cyber‑style)
@@ -67,16 +80,14 @@ def xp_bar(xp, level, config):
 
     return "[" + Fore.GREEN + "#" * filled + Style.RESET_ALL + "-" * empty + "]"
 
-
 # ---------------------------------------------------------
 # CLEAR SCREEN
 # ---------------------------------------------------------
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-
 # ---------------------------------------------------------
-# MAIN RENDER FUNCTION WITH ANIMATION
+# MAIN RENDER FUNCTION WITH MOOD-BASED ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
     xp = state.get("xp", 0)
@@ -84,31 +95,32 @@ def render(state, mood, stage, phrase):
     config = state["config"]
 
     frames = FACES.get(mood, DEFAULT_FACE)
+    cycles = ANIMATION_LENGTH.get(mood, 4)
 
-    # Play 2-frame animation
-    for frame in frames:
-        clear()
+    # Play animation cycles
+    for _ in range(cycles):
+        for frame in frames:
+            clear()
 
-        print(Fore.CYAN + "========================================")
-        print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
-        print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+            print(Fore.CYAN + "========================================")
+            print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
+            print(Fore.CYAN + "========================================" + Style.RESET_ALL)
 
-        # Creature display
-        print(Fore.GREEN + f"   {frame}")
-        print(Fore.GREEN + f"   Stage : {stage}")
-        print(Fore.GREEN + f"   Mood  : {mood}")
-        print()
+            # Creature display
+            print(Fore.GREEN + f"   {frame}")
+            print(Fore.GREEN + f"   Stage : {stage}")
+            print(Fore.GREEN + f"   Mood  : {mood}")
+            print()
 
-        # XP bar
-        print(Fore.YELLOW + f"XP   : {xp}")
-        print(Fore.YELLOW + f"Level: {level}")
-        print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
-        print()
+            # XP bar
+            print(Fore.YELLOW + f"XP   : {xp}")
+            print(Fore.YELLOW + f"Level: {level}")
+            print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
+            print()
 
-        print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
+            print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
 
-        print(Fore.WHITE + phrase)
-        print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+            print(Fore.WHITE + phrase)
+            print(Fore.CYAN + "========================================" + Style.RESET_ALL)
 
-        time.sleep(0.12)  # smooth animation timing
-
+            time.sleep(0.10)  # smooth animation timing
