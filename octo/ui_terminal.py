@@ -21,43 +21,45 @@ FACES = {
 DEFAULT_FACE = ["( ^~^ )", "( ^-^ )"]
 
 # ---------------------------------------------------------
-# EVOLUTION ASCII ART (hybrid cute + hacker)
+# EVOLUTION ASCII ART WITH FACE SLOT
 # ---------------------------------------------------------
 EVOLUTION_ART = {
     "Baby": [
         "    .-.",
         "   /   \\",
         "   |=| ",
+        "  [FACE_HERE]",
         "  __|__",
     ],
     "Learner": [
         "    .-.",
         "   /   \\",
         "   |=|]───┐",
+        "  [FACE_HERE]",
         "   / |    |",
     ],
     "Chaotic Gremlin": [
         "   \\\|||///",
         "     ^   ^",
+        "   [FACE_HERE]",
         "    /|  ^  |\\",
         "     |  V  |",
     ],
     "Analyst": [
         "    /\\_/\\",
         "   /     \\",
-        "    > ^ <",
+        "   [FACE_HERE]",
         "   /|===|\\",
     ],
     "Hybrid": [
         "     /\\___/\\",
         "   .=|     |=.",
-        "   \\   ---   /",
+        "   [FACE_HERE]",
         "   /|  ===  |\\",
     ],
 }
 
-
-DEFAULT_EVOLUTION = ["   (???)"]
+DEFAULT_EVOLUTION = ["[FACE_HERE]"]
 
 # ---------------------------------------------------------
 # MOOD-BASED ANIMATION LENGTH
@@ -118,7 +120,7 @@ def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 # ---------------------------------------------------------
-# MAIN RENDER FUNCTION WITH EVOLUTION ART + ANIMATION
+# MAIN RENDER FUNCTION WITH EVOLUTION + FACE SLOT + ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
     xp = state.get("xp", 0)
@@ -128,7 +130,6 @@ def render(state, mood, stage, phrase):
     frames = FACES.get(mood, DEFAULT_FACE)
     cycles = ANIMATION_LENGTH.get(mood, 4)
     colors = MOOD_COLORS.get(mood, DEFAULT_COLORS)
-
     evo_art = EVOLUTION_ART.get(stage, DEFAULT_EVOLUTION)
 
     frame_color = colors["frame"]
@@ -143,17 +144,17 @@ def render(state, mood, stage, phrase):
             print(text_color + "      < OctoBuddy Terminal Interface >")
             print(frame_color + "========================================" + Style.RESET_ALL)
 
-            # Evolution body
+            # Evolution body with face slot replaced
             for line in evo_art:
-                print(text_color + "   " + line)
+                if "[FACE_HERE]" in line:
+                    print(text_color + "   " + line.replace("[FACE_HERE]", frame))
+                else:
+                    print(text_color + "   " + line)
 
-            # Animated face
-            print(text_color + f"   {frame}")
             print(text_color + f"   Stage : {stage}")
             print(text_color + f"   Mood  : {mood}")
             print()
 
-            # XP bar
             print(Fore.YELLOW + f"XP   : {xp}")
             print(Fore.YELLOW + f"Level: {level}")
             print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
@@ -173,9 +174,11 @@ def render(state, mood, stage, phrase):
     print(frame_color + "========================================" + Style.RESET_ALL)
 
     for line in evo_art:
-        print(text_color + "   " + line)
+        if "[FACE_HERE]" in line:
+            print(text_color + "   " + line.replace("[FACE_HERE]", frames[0]))
+        else:
+            print(text_color + "   " + line)
 
-    print(text_color + f"   {frames[0]}")
     print(text_color + f"   Stage : {stage}")
     print(text_color + f"   Mood  : {mood}")
     print()
