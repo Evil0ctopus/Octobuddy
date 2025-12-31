@@ -1,0 +1,24 @@
+name: "OctoBuddy"
+version: "0.1.0"
+
+xp_per_study_event: 10
+xp_levels:
+  - level: 1
+    threshold: 0
+  - level: 2
+    threshold: 50
+  - level: 3
+    threshold: 150
+  - level: 4
+    threshold: 300
+
+moods:
+  - name: "sleepy"
+    min_xp: 0
+    max_xp: 40
+  - name: "curious"
+    min_xp: 40
+    max_xp: 120
+  - name: "hyper"
+    min_xp: 120
+    max_xp: 999999
