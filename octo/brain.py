@@ -22,3 +22,10 @@ def get_mood(state, config):
         if mood["min_xp"] <= xp < mood["max_xp"]:
             return mood["name"]
     return "hyper"
+def update_state_from_event(state, event_type, data, config):
+    ...
+    return state
+
+def get_mood(state, config):
+    ...
+    return "hyper"
