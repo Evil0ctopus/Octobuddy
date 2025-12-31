@@ -16,16 +16,19 @@ def update_state_from_event(state, event_type, data, config):
 
     return state
 
+
 def get_mood(state, config):
     xp = state.get("xp", 0)
     for mood in config["moods"]:
         if mood["min_xp"] <= xp < mood["max_xp"]:
             return mood["name"]
     return "hyper"
-def update_state_from_event(state, event_type, data, config):
-    ...
-    return state
 
-def get_mood(state, config):
-    ...
-    return "hyper"
+
+# ⭐ ADD THIS NEW FUNCTION BELOW
+def get_stage(state, config):
+    xp = state.get("xp", 0)
+    for stage in config.get("stages", []):
+        if stage["min_xp"] <= xp < stage["max_xp"]:
+            return stage["name"]
+    return "Unknown"
