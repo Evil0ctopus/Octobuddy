@@ -55,7 +55,7 @@ PHRASES = {
         ],
         "excited": [
             "YESSSS PYTHON! FEED ME MORE KNOWLEDGE!",
-            "I LOVE LEARNING! I LOVE CHAOS! I LOVE YOU! LET’S GO!",
+            "I LOVE LEARNING! I LOVE CHAOS! LET’S GO!",
         ],
     },
 }
@@ -93,11 +93,11 @@ def get_phrase_for_event(event_type, state, mood, stage):
             "We are unstoppable together.",
         ])
 
-    # Random chance to trigger a quirk
-if random.random() < 0.15:  # 15% chance
-    quirk_list = QUIRKS.get(stage, [])
-    if quirk_list:
-        return random.choice(quirk_list)
+    # Random chance to trigger a quirk (15%)
+    if random.random() < 0.15:
+        quirk_list = QUIRKS.get(stage, [])
+        if quirk_list:
+            return random.choice(quirk_list)
 
     # Mood-based fallback
     mood_phrases = PHRASES.get(event_type, {}).get(mood, [])
@@ -105,3 +105,4 @@ if random.random() < 0.15:  # 15% chance
         return "I felt something… not sure what, but it was magical."
 
     return random.choice(mood_phrases)
+
