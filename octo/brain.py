@@ -31,4 +31,9 @@ def get_stage(state, config):
     for stage in config.get("stages", []):
         if stage["min_xp"] <= xp < stage["max_xp"]:
             return stage["name"]
+
+    # Small chance of a random mood swing
+if random.random() < 0.05:  # 5% chance
+    return random.choice([m["name"] for m in config["moods"]])
+
     return "Unknown"
