@@ -93,6 +93,12 @@ def get_phrase_for_event(event_type, state, mood, stage):
             "We are unstoppable together.",
         ])
 
+    # Random chance to trigger a quirk
+if random.random() < 0.15:  # 15% chance
+    quirk_list = QUIRKS.get(stage, [])
+    if quirk_list:
+        return random.choice(quirk_list)
+
     # Mood-based fallback
     mood_phrases = PHRASES.get(event_type, {}).get(mood, [])
     if not mood_phrases:
