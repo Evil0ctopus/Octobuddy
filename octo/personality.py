@@ -38,8 +38,41 @@ PHRASES = {
 }
 
 
-def get_phrase_for_event(event_type, state, mood):
+def get_phrase_for_event(event_type, state, mood, stage):
+    # Stage-based overrides
+    if stage == "Baby":
+        return random.choice([
+            "I'm tiny but I'm learning!",
+            "Everything is new and confusing but fun!",
+        ])
+
+    if stage == "Learner":
+        return random.choice([
+            "I'm getting smarter every day!",
+            "Learning feels good. Let's keep going!",
+        ])
+
+    if stage == "Chaotic Gremlin":
+        return random.choice([
+            "I crave knowledge AND chaos!",
+            "Let's break something so we can fix it!",
+        ])
+
+    if stage == "Analyst":
+        return random.choice([
+            "I see patterns everywhere now.",
+            "This data… it speaks to me.",
+        ])
+
+    if stage == "Fully Evolved Hybrid":
+        return random.choice([
+            "I have transcended. Feed me more knowledge.",
+            "We are unstoppable together.",
+        ])
+
+    # Mood-based fallback
     mood_phrases = PHRASES.get(event_type, {}).get(mood, [])
     if not mood_phrases:
         return "I felt something… not sure what, but it was magical."
+
     return random.choice(mood_phrases)
