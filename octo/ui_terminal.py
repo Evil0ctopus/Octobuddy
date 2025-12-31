@@ -59,7 +59,23 @@ ANIMATION_LENGTH = {
 }
 
 # ---------------------------------------------------------
-# XP BAR (cyber‑style)
+# NEON MOOD COLOR PALETTE
+# ---------------------------------------------------------
+MOOD_COLORS = {
+    "sleepy":   {"frame": Fore.BLUE,      "text": Fore.CYAN},
+    "curious":  {"frame": Fore.CYAN,      "text": Fore.GREEN},
+    "hyper":    {"frame": Fore.YELLOW,    "text": Fore.GREEN},
+    "goofy":    {"frame": Fore.MAGENTA,   "text": Fore.YELLOW},
+    "chaotic":  {"frame": Fore.MAGENTA,   "text": Fore.RED},
+    "proud":    {"frame": Fore.YELLOW,    "text": Fore.WHITE},
+    "confused": {"frame": Fore.MAGENTA,   "text": Fore.CYAN},
+    "excited":  {"frame": Fore.MAGENTA,   "text": Fore.YELLOW},
+}
+
+DEFAULT_COLORS = {"frame": Fore.CYAN, "text": Fore.WHITE}
+
+# ---------------------------------------------------------
+# XP BAR (always green)
 # ---------------------------------------------------------
 def xp_bar(xp, level, config):
     levels = sorted(config["xp_levels"], key=lambda x: x["threshold"])
@@ -87,7 +103,7 @@ def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 # ---------------------------------------------------------
-# MAIN RENDER FUNCTION WITH MOOD-BASED ANIMATION
+# MAIN RENDER FUNCTION WITH NEON COLORS + ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
     xp = state.get("xp", 0)
@@ -96,31 +112,56 @@ def render(state, mood, stage, phrase):
 
     frames = FACES.get(mood, DEFAULT_FACE)
     cycles = ANIMATION_LENGTH.get(mood, 4)
+    colors = MOOD_COLORS.get(mood, DEFAULT_COLORS)
 
-    # Play animation cycles
+    frame_color = colors["frame"]
+    text_color = colors["text"]
+
+    # Animation cycles
     for _ in range(cycles):
         for frame in frames:
             clear()
 
-            print(Fore.CYAN + "========================================")
-            print(Fore.MAGENTA + "      < OctoBuddy Terminal Interface >")
-            print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+            print(frame_color + "========================================")
+            print(text_color + "      < OctoBuddy Terminal Interface >")
+            print(frame_color + "========================================" + Style.RESET_ALL)
 
             # Creature display
-            print(Fore.GREEN + f"   {frame}")
-            print(Fore.GREEN + f"   Stage : {stage}")
-            print(Fore.GREEN + f"   Mood  : {mood}")
+            print(text_color + f"   {frame}")
+            print(text_color + f"   Stage : {stage}")
+            print(text_color + f"   Mood  : {mood}")
             print()
 
-            # XP bar
+            # XP bar (always green)
             print(Fore.YELLOW + f"XP   : {xp}")
             print(Fore.YELLOW + f"Level: {level}")
             print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
             print()
 
-            print(Fore.CYAN + "----------------------------------------" + Style.RESET_ALL)
+            print(frame_color + "----------------------------------------" + Style.RESET_ALL)
 
-            print(Fore.WHITE + phrase)
-            print(Fore.CYAN + "========================================" + Style.RESET_ALL)
+            print(text_color + phrase)
+            print(frame_color + "========================================" + Style.RESET_ALL)
 
-            time.sleep(0.10)  # smooth animation timing
+            time.sleep(0.10)
+
+    # Final static frame
+    clear()
+
+    print(frame_color + "========================================")
+    print(text_color + "      < OctoBuddy Terminal Interface >")
+    print(frame_color + "========================================" + Style.RESET_ALL)
+
+    print(text_color + f"   {frames[0]}")
+    print(text_color + f"   Stage : {stage}")
+    print(text_color + f"   Mood  : {mood}")
+    print()
+
+    print(Fore.YELLOW + f"XP   : {xp}")
+    print(Fore.YELLOW + f"Level: {level}")
+    print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
+    print()
+
+    print(frame_color + "----------------------------------------" + Style.RESET_ALL)
+    print(text_color + phrase)
+    print(frame_color + "========================================" + Style.RESET_ALL)
