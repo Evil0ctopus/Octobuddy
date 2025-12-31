@@ -79,7 +79,3 @@ def get_stage(state, config):
             return stage["name"]
 
     return "Unknown"
-
-            return stage["name"]
-
-    return "Unknown"
