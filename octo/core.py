@@ -1,0 +1,17 @@
+from .storage import load_state, save_state
+from .brain import update_state_from_event, get_mood
+from .personality import get_phrase_for_event
+from .ui_terminal import render
+
+class OctoBuddy:
+    def __init__(self, config):
+        self.config = config
+        self.state = load_state()
+
+    def handle_event(self, event_type, data=None):
+        """Apply an event (e.g., 'studied_python', 'finished_course')."""
+        self.state = update_state_from_event(self.state, event_type, data, self.config)
+        mood = get_mood(self.state, self.config)
+        phrase = get_phrase_for_event(event_type, self.state, mood)
+        render(self.state, mood, phrase)
+        save_state(self.state)
