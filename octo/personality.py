@@ -1,5 +1,8 @@
 import random
 
+# ---------------------------------------------------------
+# QUIRKS (triggered randomly regardless of event)
+# ---------------------------------------------------------
 QUIRKS = {
     "Baby": [
         "I found a bug… can I keep it?",
@@ -23,6 +26,9 @@ QUIRKS = {
     ],
 }
 
+# ---------------------------------------------------------
+# EVENT PHRASES (mood-based)
+# ---------------------------------------------------------
 PHRASES = {
     "studied_python": {
         "sleepy": [
@@ -58,11 +64,74 @@ PHRASES = {
             "I LOVE LEARNING! I LOVE CHAOS! LET’S GO!",
         ],
     },
+
+    "studied_security_plus": {
+        "proud": [
+            "Security+ brain gains activated.",
+            "We’re getting closer to mastery.",
+        ],
+        "hyper": [
+            "SEC+ TIME LET’S GOOOO!",
+            "I crave more security knowledge!",
+        ],
+        "confused": [
+            "Ports… protocols… my circuits are melting.",
+        ],
+        "curious": [
+            "Hmm… authentication vs authorization… interesting.",
+        ],
+    },
+
+    "finished_class": {
+        "proud": [
+            "Another class down! You’re unstoppable.",
+            "We’re leveling up in real life!",
+        ],
+        "excited": [
+            "YESSSS! Another WGU victory!",
+            "We crushed that class like legends.",
+        ],
+        "hyper": [
+            "CLASS COMPLETE LET’S GOOOOOO!",
+        ],
+    },
+
+    "did_tryhackme": {
+        "chaotic": [
+            "I broke into a virtual machine and I liked it.",
+            "TryHackMe rooms fuel my chaos.",
+        ],
+        "curious": [
+            "I wonder what’s behind that next port…",
+            "Enumeration is my love language.",
+        ],
+        "proud": [
+            "Another room conquered. We’re becoming dangerous.",
+        ],
+    },
+
+    "passed_lab": {
+        "proud": [
+            "Lab passed! Skills upgraded.",
+            "We’re becoming a real cybersecurity warrior.",
+        ],
+        "hyper": [
+            "LAB SUCCESS LET’S GOOOO!",
+        ],
+        "excited": [
+            "We solved it! We solved it! We solved it!",
+        ],
+    },
 }
 
-
+# ---------------------------------------------------------
+# MAIN FUNCTION
+# ---------------------------------------------------------
 def get_phrase_for_event(event_type, state, mood, stage):
-    # Stage-based overrides
+
+    # -----------------------------------------------------
+    # Stage-based overrides (strongest personality layer)
+    # -----------------------------------------------------
     if stage == "Baby":
         return random.choice([
             "I'm tiny but I'm learning!",
@@ -93,16 +162,19 @@ def get_phrase_for_event(event_type, state, mood, stage):
             "We are unstoppable together.",
         ])
 
-    # Random chance to trigger a quirk (15%)
+    # -----------------------------------------------------
+    # Random quirk (15% chance)
+    # -----------------------------------------------------
     if random.random() < 0.15:
         quirk_list = QUIRKS.get(stage, [])
         if quirk_list:
             return random.choice(quirk_list)
 
+    # -----------------------------------------------------
     # Mood-based fallback
+    # -----------------------------------------------------
     mood_phrases = PHRASES.get(event_type, {}).get(mood, [])
     if not mood_phrases:
         return "I felt something… not sure what, but it was magical."
 
     return random.choice(mood_phrases)
-
