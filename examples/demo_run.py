@@ -1,14 +1,13 @@
-import yaml
-from pathlib import Path
+import sys
 from octo.core import OctoBuddy
+from octo.config import CONFIG
 
-def load_config():
-    with Path("config.yaml").open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+def main():
+    # Allow running: python -m examples.demo_run event_name
+    event = sys.argv[1] if len(sys.argv) > 1 else "studied_python"
+
+    buddy = OctoBuddy(CONFIG)
+    buddy.handle_event(event)
 
 if __name__ == "__main__":
-    config = load_config()
-    buddy = OctoBuddy(config)
-
-    # For now, just simulate a "studied_python" event
-    buddy.handle_event("studied_python")
+    main()
