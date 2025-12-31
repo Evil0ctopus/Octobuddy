@@ -8,41 +8,56 @@ init(autoreset=True)
 # TWO-FRAME ANIMATED FACES (wiggle + blink)
 # ---------------------------------------------------------
 FACES = {
-    "sleepy": [
-        "( -.- ) zZ",
-        "( -.- ) ...",
-    ],
-    "curious": [
-        "( o.O )",
-        "( O.o )",
-    ],
-    "hyper": [
-        "( ^o^ )/",
-        "\\( ^o^ )",
-    ],
-    "goofy": [
-        "( @v@ )",
-        "( @.@ )",
-    ],
-    "chaotic": [
-        "( >:D )",
-        "( >XD )",
-    ],
-    "proud": [
-        "( ^‿^ )",
-        "( ^▿^ )",
-    ],
-    "confused": [
-        "( ?_? )",
-        "( ?.? )",
-    ],
-    "excited": [
-        "( ^O^ )!!",
-        "( ^0^ )!!",
-    ],
+    "sleepy": ["( -.- ) zZ", "( -.- ) ..."],
+    "curious": ["( o.O )", "( O.o )"],
+    "hyper": ["( ^o^ )/", "\\( ^o^ )"],
+    "goofy": ["( @v@ )", "( @.@ )"],
+    "chaotic": ["( >:D )", "( >XD )"],
+    "proud": ["( ^‿^ )", "( ^▿^ )"],
+    "confused": ["( ?_? )", "( ?.? )"],
+    "excited": ["( ^O^ )!!", "( ^0^ )!!"],
 }
 
 DEFAULT_FACE = ["( ^~^ )", "( ^-^ )"]
+
+# ---------------------------------------------------------
+# EVOLUTION ASCII ART (hybrid cute + hacker)
+# ---------------------------------------------------------
+EVOLUTION_ART = {
+    "Baby": [
+        "    .-.",
+        "   (o o)",
+        "   |=| ",
+        "  __|__",
+    ],
+    "Learner": [
+        "    .-.",
+        "   (o o)",
+        "   |=|]───┐",
+        "   / |    |",
+    ],
+    "Chaotic Gremlin": [
+        "   \\\|||///",
+        "   ( >.< )",
+        "  /|  ^  |\\",
+        "   |  V  |",
+    ],
+    "Analyst": [
+        "    /\\_/\\",
+        "   ( o.o )",
+        "    > ^ <",
+        "   /|===|\\",
+    ],
+    "Hybrid": [
+        "     /\\___/\\",
+        "   .=|     |=.",
+        "  (  (o) (o)  )",
+        "   \\   ---   /",
+        "   /|  ===  |\\",
+    ],
+}
+
+DEFAULT_EVOLUTION = ["   (???)"]
 
 # ---------------------------------------------------------
 # MOOD-BASED ANIMATION LENGTH
@@ -103,7 +118,7 @@ def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 # ---------------------------------------------------------
-# MAIN RENDER FUNCTION WITH NEON COLORS + ANIMATION
+# MAIN RENDER FUNCTION WITH EVOLUTION ART + ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
     xp = state.get("xp", 0)
@@ -113,6 +128,8 @@ def render(state, mood, stage, phrase):
     frames = FACES.get(mood, DEFAULT_FACE)
     cycles = ANIMATION_LENGTH.get(mood, 4)
     colors = MOOD_COLORS.get(mood, DEFAULT_COLORS)
+
+    evo_art = EVOLUTION_ART.get(stage, DEFAULT_EVOLUTION)
 
     frame_color = colors["frame"]
     text_color = colors["text"]
@@ -126,20 +143,23 @@ def render(state, mood, stage, phrase):
             print(text_color + "      < OctoBuddy Terminal Interface >")
             print(frame_color + "========================================" + Style.RESET_ALL)
 
-            # Creature display
+            # Evolution body
+            for line in evo_art:
+                print(text_color + "   " + line)
+
+            # Animated face
             print(text_color + f"   {frame}")
             print(text_color + f"   Stage : {stage}")
             print(text_color + f"   Mood  : {mood}")
             print()
 
-            # XP bar (always green)
+            # XP bar
             print(Fore.YELLOW + f"XP   : {xp}")
             print(Fore.YELLOW + f"Level: {level}")
             print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
             print()
 
             print(frame_color + "----------------------------------------" + Style.RESET_ALL)
-
             print(text_color + phrase)
             print(frame_color + "========================================" + Style.RESET_ALL)
 
@@ -151,6 +171,9 @@ def render(state, mood, stage, phrase):
     print(frame_color + "========================================")
     print(text_color + "      < OctoBuddy Terminal Interface >")
     print(frame_color + "========================================" + Style.RESET_ALL)
+
+    for line in evo_art:
+        print(text_color + "   " + line)
 
     print(text_color + f"   {frames[0]}")
     print(text_color + f"   Stage : {stage}")
