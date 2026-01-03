@@ -52,6 +52,8 @@ python examples/demo_run.py
 
 ## Usage Examples
 
+### Basic Event Handling
+
 Run with specific events:
 
 ```bash
@@ -69,5 +71,21 @@ python examples/demo_run.py bug_bounty
 
 # Code review
 python examples/demo_run.py code_review
+```
+
+### View Your Stats
+
+Check OctoBuddy's progress and activity summary:
+
+```bash
+python examples/view_stats.py
+```
+
+### Advanced Demo
+
+See all event types in action:
+
+```bash
+python examples/demo_advanced.py --demo-all
 ```
 
