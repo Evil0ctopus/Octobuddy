@@ -44,6 +44,25 @@ def update_state_from_event(state, event_type, data, config):
         state["labs_passed"] = state.get("labs_passed", 0) + 1
 
     # -----------------------------
+    # New cybersecurity events
+    # -----------------------------
+    if event_type == "bug_bounty":
+        state["xp"] += dynamic_xp * 8
+        state["bug_bounties"] = state.get("bug_bounties", 0) + 1
+
+    if event_type == "ctf_challenge":
+        state["xp"] += dynamic_xp * 6
+        state["ctf_challenges"] = state.get("ctf_challenges", 0) + 1
+
+    if event_type == "code_review":
+        state["xp"] += dynamic_xp * 4
+        state["code_reviews"] = state.get("code_reviews", 0) + 1
+
+    if event_type == "read_documentation":
+        state["xp"] += dynamic_xp * 2
+        state["docs_read"] = state.get("docs_read", 0) + 1
+
+    # -----------------------------
     # Level calculation
     # -----------------------------
     current_level = state.get("level", 1)

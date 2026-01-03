@@ -39,10 +39,10 @@ EVOLUTION_ART = {
         "   / |    |",
     ],
     "Chaotic Gremlin": [
-        "   \\\|||///",
+        r"   \|||///",
         "     ^   ^",
         "   [FACE_HERE]",
-        "    /|  ^  |\\",
+        r"    /|  ^  |" + "\\",
         "     |  V  |",
     ],
     "Analyst": [
