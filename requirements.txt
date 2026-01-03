@@ -1,1 +1,6 @@
 pyyaml
+PyQt6
+Pillow
+pywin32; platform_system=="Windows"
+colorama
+psutil
