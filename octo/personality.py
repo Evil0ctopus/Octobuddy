@@ -122,6 +122,85 @@ PHRASES = {
             "We solved it! We solved it! We solved it!",
         ],
     },
+
+    "bug_bounty": {
+        "excited": [
+            "BUG BOUNTY! We found a real vulnerability!",
+            "We're basically a hacker hero now!",
+        ],
+        "proud": [
+            "Another bug bounty in the books. We're dangerous now.",
+            "Real-world impact. This is what it's all about.",
+        ],
+        "chaotic": [
+            "I found a vulnerability and got PAID for it!",
+            "Breaking things responsibly is my new favorite hobby.",
+        ],
+        "hyper": [
+            "BUG BOUNTY SUBMITTEEEEED!",
+            "FOUND IT! REPORTED IT! WINNING!",
+        ],
+    },
+
+    "ctf_challenge": {
+        "chaotic": [
+            "CTF challenge crushed! On to the next flag!",
+            "I decoded things I didn't know existed!",
+        ],
+        "curious": [
+            "That CTF challenge taught me something new...",
+            "Interesting puzzle. My circuits enjoyed that.",
+        ],
+        "proud": [
+            "Another CTF flag captured. We're getting good at this.",
+            "CTF skills leveling up nicely.",
+        ],
+        "hyper": [
+            "FLAG CAPTURED! CTF DOMINATION!",
+            "WE GOT THE FLAG! YESSSSS!",
+        ],
+        "excited": [
+            "CTF victory! I love solving these puzzles!",
+        ],
+    },
+
+    "code_review": {
+        "curious": [
+            "Code review complete. I learned something from that code.",
+            "Interesting patterns in this codebase...",
+        ],
+        "proud": [
+            "Code review done. We're getting better at spotting issues.",
+            "Another review completed. Our skills are sharpening.",
+        ],
+        "sleepy": [
+            "Reviewed the code... my brain needs a break now.",
+            "That was a lot of code. Good work though.",
+        ],
+        "goofy": [
+            "I found a variable named 'foo'. Classic.",
+            "Code review complete! Some of it made sense!",
+        ],
+    },
+
+    "read_documentation": {
+        "curious": [
+            "Documentation absorbed! Knowledge acquired!",
+            "Hmm... so that's how it works. Neat.",
+        ],
+        "sleepy": [
+            "I read the docs... eventually fell asleep on page 47.",
+            "Documentation read. Brain officially full.",
+        ],
+        "proud": [
+            "RTFM complete. We're doing it right.",
+            "Docs read thoroughly. No shortcuts here.",
+        ],
+        "goofy": [
+            "I read the entire manual and understood 60% of it!",
+            "Documentation is like a novel but more confusing!",
+        ],
+    },
 }
 
 # ---------------------------------------------------------
