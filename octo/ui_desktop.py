@@ -226,13 +226,23 @@ class OctoBuddyWindow(QMainWindow):
     def mousePressEvent(self, event):
         """Handle mouse press for dragging"""
         if event.button() == Qt.MouseButton.LeftButton:
-            self.drag_position = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+            # Get global position (compatible with PyQt6)
+            try:
+                global_pos = event.globalPosition().toPoint()
+            except AttributeError:
+                # Fallback for older PyQt6 versions
+                global_pos = event.globalPos()
+            self.drag_position = global_pos - self.frameGeometry().topLeft()
             event.accept()
             
     def mouseMoveEvent(self, event):
         """Handle mouse move for dragging"""
         if event.buttons() == Qt.MouseButton.LeftButton and self.drag_position:
-            self.move(event.globalPosition().toPoint() - self.drag_position)
+            try:
+                global_pos = event.globalPosition().toPoint()
+            except AttributeError:
+                global_pos = event.globalPos()
+            self.move(global_pos - self.drag_position)
             event.accept()
             
     def mouseReleaseEvent(self, event):

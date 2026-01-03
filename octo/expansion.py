@@ -108,21 +108,28 @@ def execute(context=None):
             # Parse the AST to check for dangerous operations
             tree = ast.parse(code)
             
-            # List of dangerous functions/modules to avoid
-            dangerous_imports = ['os.system', 'subprocess', 'eval', 'exec', '__import__']
+            # List of dangerous modules and functions to avoid
+            dangerous_modules = ['subprocess', 'os']  # Entire modules to block
+            dangerous_functions = ['eval', 'exec', '__import__', 'compile']
             
             for node in ast.walk(tree):
                 # Check imports
                 if isinstance(node, ast.Import):
                     for alias in node.names:
-                        if any(danger in alias.name for danger in ['subprocess', 'os.system']):
+                        if any(danger in alias.name for danger in dangerous_modules):
                             print(f"Dangerous import detected: {alias.name}")
                             return False
+                            
+                # Check from imports
+                if isinstance(node, ast.ImportFrom):
+                    if node.module and any(danger in node.module for danger in dangerous_modules):
+                        print(f"Dangerous import from detected: {node.module}")
+                        return False
                             
                 # Check function calls
                 if isinstance(node, ast.Call):
                     if isinstance(node.func, ast.Name):
-                        if node.func.id in ['eval', 'exec', '__import__']:
+                        if node.func.id in dangerous_functions:
                             print(f"Dangerous function call detected: {node.func.id}")
                             return False
                             

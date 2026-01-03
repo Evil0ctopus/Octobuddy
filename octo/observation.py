@@ -84,7 +84,8 @@ class WindowMonitor:
                             callback(window_info)
                         except:
                             pass
-                            
+                    
+                # Use time.sleep in this daemon thread (safe for background monitoring)
                 time.sleep(interval)
                 
         self.monitor_thread = threading.Thread(target=monitor_loop, daemon=True)
