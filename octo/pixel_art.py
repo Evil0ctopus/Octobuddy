@@ -433,41 +433,53 @@ def draw_geometric_patterns(grid: PixelGrid, palette: Dict[str, RGB]) -> None:
 # MAIN RENDER FUNCTION
 # =============================================================================
 
-def render_pixel_art(state: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> PixelGrid:
+def render_pixel_art(
+    state: Dict[str, Any],
+    config: Optional[Dict[str, Any]] = None,
+    stage: Optional[str] = None,
+    mood: Optional[str] = None
+) -> PixelGrid:
     """
     Main rendering function: Generate 128x128 pixel art from state.
-    
-    This is a pure function - same state always produces same output.
-    All randomness is seeded by state values for consistency.
-    
-    Args:
-        state: Current OctoBuddy state (xp, level, mutations, drift, etc.)
-        config: Optional config (falls back to state["config"])
-    
-    Returns:
-        128x128 pixel grid (list of lists of RGB tuples)
+
+    This version is backward-compatible with both:
+    - render_pixel_art(state)
+    - render_pixel_art(state, config)
+    - render_pixel_art(state, config, stage, mood)
+
+    The extra stage/mood arguments are accepted for compatibility with
+    the desktop companion, but the renderer still derives stage/mood
+    from state unless explicitly provided.
     """
+
     # Ensure config is available
     if config is None:
         config = state.get("config", {})
     if "config" not in state:
         state = {**state, "config": config}
-    
+
+    # Override stage/mood only if explicitly passed
+    # (Desktop companion passes them, terminal version does not)
+    if stage is not None:
+        state["forced_stage"] = stage
+    if mood is not None:
+        state["forced_mood"] = mood
+
     # Create canvas
     grid = create_blank_canvas()
-    
+
     # Get evolution-aware palette
     palette = get_evolution_palette(state)
-    
+
     # Get mutation effects
     effects = get_mutation_visual_effects(state)
-    
+
     # Draw base octopus (order matters for layering)
     draw_tentacles(grid, state, palette)
     draw_octopus_body(grid, state, palette)
     draw_eyes(grid, state, palette, effects)
     draw_mouth(grid, state, palette)
-    
+
     # Apply mutation effects
     if effects["aura"]:
         draw_aura(grid, palette)
@@ -479,7 +491,7 @@ def render_pixel_art(state: Dict[str, Any], config: Optional[Dict[str, Any]] = N
         draw_geometric_patterns(grid, palette)
     if effects["sparkles"]:
         draw_sparkles(grid, state)
-    
+
     return grid
 
 
