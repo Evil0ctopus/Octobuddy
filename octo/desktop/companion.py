@@ -547,9 +547,10 @@ class OctoBuddyWindow(QWidget):
         # Center horizontally
         x = (window_width - bubble_width) // 2
 
-        # Position above the sprite instead of at the top of the window
-        sprite_top = self.image_label.y()
-        y = sprite_top - bubble_height - 10  # 10px above the sprite
+        # Position above the sprite
+        sprite_height = self.image_label.height()
+        y = sprite_height - bubble_height - 10
+
 
         
         # Ensure bubble doesn't go off-screen left/right
