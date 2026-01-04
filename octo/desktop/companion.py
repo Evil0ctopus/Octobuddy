@@ -548,9 +548,10 @@ class OctoBuddyWindow(QWidget):
         # Center horizontally
         x = (window_width - bubble_width) // 2
 
-        # Position above the sprite
-        sprite_height = self.image_label.height()
-        y = sprite_height - bubble_height - 10
+        # Position above the sprite (now that sprite has a top margin)
+        sprite_top = self.image_label.y()
+        y = sprite_top - bubble_height - 5
+
 
 
         
