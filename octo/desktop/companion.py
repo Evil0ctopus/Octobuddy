@@ -495,7 +495,8 @@ class OctoBuddyWindow(QWidget):
         
         if ok and text.strip():
             # Generate response based on personality and mood
-            response = self._generate_response(text.strip())
+            response = self.generate_conversational_reply(text.strip())
+
             
             # Boost social evolution variables
             ev_vars = dict(self.state.get("evolution_vars", {}))
