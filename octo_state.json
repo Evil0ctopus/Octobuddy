@@ -11,6 +11,14 @@
     "ambitious": 0.0
   },
   "evolution_vars": {
-    "empathy": 6.0
+    "empathy": 8.2,
+    "happiness": 7.0,
+    "calmness": 6.6,
+    "chaos": 4.5,
+    "curiosity": 5.4
+  },
+  "personality_traits": {
+    "humor": 5.8,
+    "shyness": 4.8
   }
 }

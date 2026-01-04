@@ -48,7 +48,27 @@ OctoBuddy is a fully autonomous AI creature that lives on your Windows desktop, 
 - **Appearance Memory** - Visual evolution milestones
 - **Ability Memory** - Usage tracking and statistics
 
-### 🖥️ Windows Desktop UI
+### � Drag-and-Drop Learning
+- **File Learning Zone** - Drop files to teach OctoBuddy
+- **Multi-Format Support** - .txt, .md, .rtf, .json, .pdf (with PyPDF2)
+- **Vocabulary Extraction** - Learns new words and frequencies
+- **Phrase Learning** - Captures bigrams and trigrams
+- **Style Analysis** - Detects sentence length, punctuation patterns
+- **Grammar Detection** - Identifies passive voice, contractions, complexity
+- **Personality Drift** - Formal text → analytical, Casual → humorous, Technical → studious
+- **Memory Persistence** - Saves learned content to `memory/` folder
+- **Visual Feedback** - Shows learning progress via speech bubbles
+### 💬 Conversation Engine
+- **Message Analysis** - Detects tone, emotion, topics, and keywords
+- **Contextual Responses** - Replies based on personality, mood, and learned vocabulary
+- **Follow-up Questions** - Sometimes asks questions to continue dialogue (30% chance)
+- **Dialogue Learning** - Learns vocabulary, phrases, style, and grammar from conversations
+- **Personality Drift** - Speech patterns influence OctoBuddy's personality over time
+- **Empathetic Responses** - Detects and responds to emotions (happy, sad, angry, anxious)
+- **Topic Awareness** - Recognizes programming, learning, work, and personal topics
+- **Natural Responses** - Short, creature-like replies (not long paragraphs)
+- **Memory Integration** - Uses learned vocabulary for more natural conversations
+### �🖥️ Windows Desktop UI
 - **Always-On-Top** - Stays visible across all apps
 - **Transparent Background** - Seamless desktop integration
 - **Click & Drag** - Move OctoBuddy anywhere
@@ -103,7 +123,13 @@ python main.py
   - ⚡ **Abilities**: Execute available abilities
   - 🍔 **Feed**: Increase happiness, trigger evolution
   - 👋 **Pet**: Social interaction, boost empathy
+  - � **Talk**: Chat with OctoBuddy (personality-based responses)
   - 🚪 **Quit**: Close companion (auto-saves)
+- **Drag & Drop Files**: Drop text files onto the blue zone to teach OctoBuddy
+  - Supported formats: `.txt`, `.md`, `.rtf`, `.json`, `.pdf`
+  - OctoBuddy learns vocabulary, phrases, writing style, and grammar
+  - Personality drifts based on content (formal/casual/technical)
+  - All learned content saved to `memory/` folder
 
 ### Terminal Mode (Legacy)
 
