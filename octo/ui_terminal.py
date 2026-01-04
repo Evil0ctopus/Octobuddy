@@ -2,6 +2,10 @@ import os
 import time
 from colorama import Fore, Style, init
 
+# Import evolution engine for decision-making (not rendering)
+from .evolution_engine import get_dominant_drift, get_evolution_summary
+from .mutation_rules import get_mutation_display_name
+
 init(autoreset=True)
 
 # ---------------------------------------------------------
@@ -92,26 +96,65 @@ MOOD_COLORS = {
 DEFAULT_COLORS = {"frame": Fore.CYAN, "text": Fore.WHITE}
 
 # ---------------------------------------------------------
-# XP BAR (always green)
+# PERSONALITY DRIFT COLOR ACCENTS
 # ---------------------------------------------------------
-def xp_bar(xp, level, config):
-    levels = sorted(config["xp_levels"], key=lambda x: x["threshold"])
-    current = next((lv for lv in levels if lv["level"] == level), None)
-    next_lv = next((lv for lv in levels if lv["level"] == level + 1), None)
+DRIFT_COLORS = {
+    "analytical": Fore.BLUE,
+    "chaotic": Fore.MAGENTA,
+    "studious": Fore.GREEN,
+    "ambitious": Fore.YELLOW,
+}
 
-    if not next_lv:
-        return "[ MAX LEVEL ]"
+# ---------------------------------------------------------
+# EVOLUTION INFO RENDERING
+# ---------------------------------------------------------
+def render_mutations(state, color):
+    """Render mutation badges if any exist."""
+    mutations = state.get("mutations", [])
+    if not mutations:
+        return
+    
+    print()
+    print(color + "Mutations:" + Style.RESET_ALL)
+    for mutation_key in mutations[:3]:  # Show max 3 to avoid clutter
+        name = get_mutation_display_name(mutation_key)
+        print(Fore.MAGENTA + f"  ⚡ {name}")
+    
+    if len(mutations) > 3:
+        print(Fore.MAGENTA + f"  + {len(mutations) - 3} more...")
 
-    min_xp = current["threshold"]
-    max_xp = next_lv["threshold"]
 
-    progress = (xp - min_xp) / (max_xp - min_xp)
-    progress = max(0, min(progress, 1))
+def render_personality_drift(state, color):
+    """Render personality drift indicator if dominant drift exists."""
+    dominant = get_dominant_drift(state)
+    if not dominant:
+        return
+    
+    drift_values = state.get("personality_drift", {})
+    drift_percentage = drift_values.get(dominant, 0)
+    
+    drift_color = DRIFT_COLORS.get(dominant, Fore.WHITE)
+    bar_length = int(drift_percentage * 20)
+    bar = "█" * bar_length
+    
+    print()
+    print(color + "Personality:" + Style.RESET_ALL)
+    print(drift_color + f"  {dominant.capitalize()} {bar} {drift_percentage:.0%}")
 
-    filled = int(progress * 20)
-    empty = 20 - filled
 
-    return "[" + Fore.GREEN + "#" * filled + Style.RESET_ALL + "-" * empty + "]"
+def render_evolution_triggers(state, color):
+    """Render evolution trigger badges if any exist."""
+    triggers = state.get("evolution_triggers", [])
+    if not triggers:
+        return
+    
+    print()
+    print(color + "Achievements:" + Style.RESET_ALL)
+    for trigger in triggers[:2]:  # Show max 2
+        print(Fore.YELLOW + f"  🌟 {trigger.replace('_', ' ').title()}")
+    
+    if len(triggers) > 2:
+        print(Fore.YELLOW + f"  + {len(triggers) - 2} more...")
 
 # ---------------------------------------------------------
 # CLEAR SCREEN
@@ -123,8 +166,6 @@ def clear():
 # MAIN RENDER FUNCTION WITH EVOLUTION + FACE SLOT + ANIMATION
 # ---------------------------------------------------------
 def render(state, mood, stage, phrase):
-    xp = state.get("xp", 0)
-    level = state.get("level", 1)
     config = state["config"]
 
     frames = FACES.get(mood, DEFAULT_FACE)
@@ -154,10 +195,11 @@ def render(state, mood, stage, phrase):
             print(text_color + f"   Stage : {stage}")
             print(text_color + f"   Mood  : {mood}")
             print()
-
-            print(Fore.YELLOW + f"XP   : {xp}")
-            print(Fore.YELLOW + f"Level: {level}")
-            print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
+            
+            # Show evolution info during animation (mutations, drift, triggers)
+            render_mutations(state, frame_color)
+            render_personality_drift(state, frame_color)
+            render_evolution_triggers(state, frame_color)
             print()
 
             print(frame_color + "----------------------------------------" + Style.RESET_ALL)
@@ -182,10 +224,11 @@ def render(state, mood, stage, phrase):
     print(text_color + f"   Stage : {stage}")
     print(text_color + f"   Mood  : {mood}")
     print()
-
-    print(Fore.YELLOW + f"XP   : {xp}")
-    print(Fore.YELLOW + f"Level: {level}")
-    print(Fore.YELLOW + f"Prog : {xp_bar(xp, level, config)}")
+    
+    # Show evolution info in final frame
+    render_mutations(state, frame_color)
+    render_personality_drift(state, frame_color)
+    render_evolution_triggers(state, frame_color)
     print()
 
     print(frame_color + "----------------------------------------" + Style.RESET_ALL)

@@ -1,0 +1,99 @@
+# OctoBuddy Configuration File
+# Central configuration for evolution, personality, and behavior
+
+# Evolution variables configuration
+evolution:
+  # Starting values (default: 5.0 for all)
+  defaults:
+    curiosity: 5.0
+    creativity: 5.0
+    confidence: 5.0
+    calmness: 5.0
+    chaos: 5.0
+    empathy: 5.0
+    focus: 5.0
+  
+  # Drift rates per event type (how much variables change)
+  drift_rates:
+    learning_event: 0.1
+    interaction_event: 0.05
+    milestone_event: 0.5
+    idle_decay: 0.01
+  
+  # Variable interactions (how they affect each other)
+  interactions:
+    chaos_reduces_calmness: 0.05
+    focus_reduces_chaos: 0.03
+    curiosity_boosts_creativity: 0.02
+
+# Personality traits configuration
+personality:
+  # Starting values (default: 5.0 for all)
+  defaults:
+    humor: 5.0
+    boldness: 5.0
+    shyness: 5.0
+    analytical: 5.0
+    chaotic: 5.0
+    studious: 5.0
+    ambitious: 5.0
+  
+  # Trait drift per event
+  drift_rates:
+    study_event: 0.1
+    social_event: 0.15
+    achievement: 0.3
+
+# Mutation system
+mutations:
+  base_chance: 0.005
+  activity_scaling: 0.00009
+  max_chance: 0.05
+
+# Moods (legacy - now tied to evolution variables)
+moods:
+  - name: "sleepy"
+    description: "Low energy, calm"
+  - name: "curious"
+    description: "Exploring, learning"
+  - name: "hyper"
+    description: "High energy, excited"
+  - name: "goofy"
+    description: "Playful, silly"
+  - name: "chaotic"
+    description: "Unpredictable, wild"
+  - name: "proud"
+    description: "Accomplished, confident"
+  - name: "confused"
+    description: "Uncertain, puzzled"
+  - name: "excited"
+    description: "Eager, enthusiastic"
+
+# Animation settings
+animation:
+  tentacle_physics:
+    spring_constant: 0.5
+    damping: 0.8
+    mass: 1.0
+  
+  idle_fidget:
+    frequency: 2.0  # Movements per second
+    amplitude: 5.0  # Pixels
+  
+  cursor_tracking:
+    enabled: true
+    max_distance: 200  # Pixels
+    attraction_strength: 0.1
+
+# Desktop UI settings
+desktop:
+  window_size: 128
+  always_on_top: true
+  framerate: 30
+  start_position: "bottom_right"
+  
+# Memory system
+memory:
+  short_term_capacity: 50  # Recent events
+  long_term_threshold: 5   # Repetitions to become long-term
+  save_interval: 300       # Seconds between saves
