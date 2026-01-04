@@ -2,5 +2,15 @@
   "xp": 445,
   "level": 5,
   "study_events": 45,
-  "name": "OctoBuddy"
+  "name": "OctoBuddy",
+  "happiness": 8,
+  "personality_drift": {
+    "analytical": 0.0,
+    "chaotic": 0.0,
+    "studious": 0.98,
+    "ambitious": 0.0
+  },
+  "evolution_vars": {
+    "empathy": 6.0
+  }
 }
