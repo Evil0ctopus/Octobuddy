@@ -162,24 +162,30 @@ class OctoBuddyWindow(QWidget):
             }
         """)
         
-        # Position drop zone below sprite
-        drop_zone_height = 45
-        self.drop_zone.setGeometry(5, size + 5, size - 10, drop_zone_height)
-        self.drop_label.setGeometry(0, 0, size - 10, drop_zone_height)
-
         # Set window size from config
         size = self.config.get("desktop", {}).get("window_size", 128)
-        self.setFixedSize(size, size + drop_zone_height + 80)
         
-        # Resize window to accommodate drop zone
-        self.setFixedSize(size, size + drop_zone_height + 10)
+        # Layout constants
+        top_margin = 60  # Room for speech bubble above sprite
+        sprite_y = top_margin
+        drop_zone_height = 45
+        drop_zone_padding = 8
+        
+        # Calculate total window height
+        window_height = top_margin + size + drop_zone_padding + drop_zone_height + 10
         
         # Create label to hold pixel art
         self.image_label = QLabel(self)
         self.image_label.setAlignment(Qt.AlignCenter)
+        self.image_label.setGeometry(0, sprite_y, size, size)
         
-        # Layout (no layout manager - use absolute positioning for bubble)
-        self.image_label.setGeometry(0, 20, size, size)  # add 20px top margin
+        # Position drop zone below sprite
+        drop_zone_y = sprite_y + size + drop_zone_padding
+        self.drop_zone.setGeometry(5, drop_zone_y, size - 10, drop_zone_height)
+        self.drop_label.setGeometry(0, 0, size - 10, drop_zone_height)
+        
+        # Set fixed window size to fit all elements
+        self.setFixedSize(size, window_height)
 
         
         # Enable drag-and-drop for the drop zone
@@ -548,9 +554,9 @@ class OctoBuddyWindow(QWidget):
         # Center horizontally
         x = (window_width - bubble_width) // 2
 
-        # Position above the sprite (now that sprite has a top margin)
+        # Position above the sprite with padding
         sprite_top = self.image_label.y()
-        y = sprite_top - bubble_height - 5
+        y = sprite_top - bubble_height - 8
 
 
 

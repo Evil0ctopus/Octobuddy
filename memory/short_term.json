@@ -47,5 +47,85 @@
     "data": {
       "message": "what is your name"
     }
+  },
+  {
+    "timestamp": "2026-01-03T23:10:03.415330",
+    "type": "talked",
+    "data": {
+      "user": "how are you today",
+      "octo": "I'm feeling it! What's next? What do you think?"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:10:15.966503",
+    "type": "talked",
+    "data": {
+      "user": "hi",
+      "octo": "Hey... nice to see you..."
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:10:31.649720",
+    "type": "talked",
+    "data": {
+      "user": "say somthing",
+      "octo": "Um, hello... *hides slightly*"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:10:50.121933",
+    "type": "talked",
+    "data": {
+      "user": "make up a name for your self",
+      "octo": "I'm so energized right now! \u26a1"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:20:03.730182",
+    "type": "talked",
+    "data": {
+      "user": "hello",
+      "octo": "Hey... nice to see you..."
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:20:29.343011",
+    "type": "talked",
+    "data": {
+      "user": "how are you",
+      "octo": "I'm listening! \ud83d\udc42"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:24:56.110117",
+    "type": "talked",
+    "data": {
+      "user": "hello",
+      "octo": "Oh... h-hi there... \ud83d\udc4b"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:28:05.597825",
+    "type": "talked",
+    "data": {
+      "user": "hello",
+      "octo": "Oh... h-hi there... \ud83d\udc4b"
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:30:50.629015",
+    "type": "talked",
+    "data": {
+      "user": "hello",
+      "octo": "Hey... nice to see you..."
+    }
+  },
+  {
+    "timestamp": "2026-01-03T23:36:40.463616",
+    "type": "talked",
+    "data": {
+      "user": "hello",
+      "octo": "Um, hello... *hides slightly*"
+    }
   }
 ]
