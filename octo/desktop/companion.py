@@ -546,7 +546,7 @@ class OctoBuddyWindow(QWidget):
         
         # Center horizontally, position above sprite
         x = (window_width - bubble_width) // 2
-        y = -bubble_height - 10  # 10px above the window
+        y = 10  # 10px above the window
         
         # Ensure bubble doesn't go off-screen left/right
         if x < -50:  # Allow some overflow for aesthetics
