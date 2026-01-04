@@ -179,7 +179,8 @@ class OctoBuddyWindow(QWidget):
         self.image_label.setAlignment(Qt.AlignCenter)
         
         # Layout (no layout manager - use absolute positioning for bubble)
-        self.image_label.setGeometry(0, 0, size, size)
+        self.image_label.setGeometry(0, 20, size, size)  # add 20px top margin
+
         
         # Enable drag-and-drop for the drop zone
         self.drop_zone.dragEnterEvent = self.dragEnterEvent
