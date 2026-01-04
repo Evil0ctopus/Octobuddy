@@ -489,8 +489,13 @@ def render_pixel_art(
         draw_spikes(grid, palette)
     if effects["geometric_patterns"]:
         draw_geometric_patterns(grid, palette)
-    if effects["sparkles"]:
+        if effects["sparkles"]:
         draw_sparkles(grid, state)
+
+    # Convert to NumPy array so the desktop companion can read .shape
+    import numpy as np
+    return np.array(grid, dtype=np.uint8)
+
 
     return grid
 
