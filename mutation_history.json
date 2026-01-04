@@ -1,0 +1,102 @@
+{
+  "mutation_count": 4,
+  "mutations": [
+    {
+      "mutation_id": "visual_0_1767489707",
+      "mutation_type": "visual",
+      "timestamp": 1767489707.666803,
+      "description": "Color palette shift",
+      "parameters": {
+        "target": "palette",
+        "strength": 0.165,
+        "hue_shift": 0.16015191844730958,
+        "saturation_shift": -0.007748299080318987,
+        "brightness_shift": 0.009374329864302788
+      },
+      "evolution_context": {
+        "curiosity": 2.0,
+        "creativity": 1.5,
+        "chaos": 1.0,
+        "confidence": 1.0,
+        "calmness": 1.0,
+        "empathy": 1.0,
+        "focus": 1.0
+      },
+      "reversible": true
+    },
+    {
+      "mutation_id": "visual_1_1767489707",
+      "mutation_type": "visual",
+      "timestamp": 1767489707.6839545,
+      "description": "Eye appearance modification",
+      "parameters": {
+        "target": "eye_style",
+        "strength": 0.165,
+        "size_delta": 0.0657602327902889,
+        "pupil_size_delta": 0.0397328427514925
+      },
+      "evolution_context": {
+        "curiosity": 1.0,
+        "creativity": 1.04,
+        "confidence": 1.015,
+        "calmness": 1.0,
+        "chaos": 1.0,
+        "empathy": 1.0,
+        "focus": 1.03,
+        "total_interactions": 0,
+        "total_learning_events": 1,
+        "total_observations": 0,
+        "total_mutations": 0,
+        "birth_time": 1767489707.6827056
+      },
+      "reversible": true
+    },
+    {
+      "mutation_id": "visual_2_1767489756",
+      "mutation_type": "visual",
+      "timestamp": 1767489756.3350806,
+      "description": "Pattern/marking addition or change",
+      "parameters": {
+        "target": "pattern",
+        "strength": 0.165,
+        "pattern_style": "none"
+      },
+      "evolution_context": {
+        "curiosity": 2.0,
+        "creativity": 1.5,
+        "chaos": 1.0,
+        "confidence": 1.0,
+        "calmness": 1.0,
+        "empathy": 1.0,
+        "focus": 1.0
+      },
+      "reversible": true
+    },
+    {
+      "mutation_id": "visual_3_1767489756",
+      "mutation_type": "visual",
+      "timestamp": 1767489756.3470666,
+      "description": "Shading style change",
+      "parameters": {
+        "target": "shading",
+        "strength": 0.165,
+        "shading_style": "specular"
+      },
+      "evolution_context": {
+        "curiosity": 1.0,
+        "creativity": 1.04,
+        "confidence": 1.015,
+        "calmness": 1.0,
+        "chaos": 1.0,
+        "empathy": 1.0,
+        "focus": 1.03,
+        "total_interactions": 0,
+        "total_learning_events": 1,
+        "total_observations": 0,
+        "total_mutations": 0,
+        "birth_time": 1767489756.3454843
+      },
+      "reversible": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "node_count": 2,
+  "nodes": {
+    "node_0": {
+      "node_id": "node_0",
+      "concept": "Testing",
+      "category": "process",
+      "learned_at": 1767489707.6722481,
+      "confidence": 0.6,
+      "related_nodes": [],
+      "properties": {}
+    },
+    "node_1": {
+      "node_id": "node_1",
+      "concept": "Testing",
+      "category": "process",
+      "learned_at": 1767489756.3385463,
+      "confidence": 0.6,
+      "related_nodes": [],
+      "properties": {}
+    }
+  }
+}

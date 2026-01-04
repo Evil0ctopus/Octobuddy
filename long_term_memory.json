@@ -1,0 +1,25 @@
+{
+  "memory_count": 2,
+  "memories": {
+    "ltm_0_1767489707": {
+      "memory_id": "ltm_0_1767489707",
+      "timestamp": 1767489707.6838427,
+      "memory_type": "learning",
+      "content": "Learned Python",
+      "importance": 0.8,
+      "context": {},
+      "access_count": 0,
+      "last_accessed": 1767489707.6838427
+    },
+    "ltm_1_1767489756": {
+      "memory_id": "ltm_1_1767489756",
+      "timestamp": 1767489756.3468997,
+      "memory_type": "learning",
+      "content": "Learned Python",
+      "importance": 0.8,
+      "context": {},
+      "access_count": 0,
+      "last_accessed": 1767489756.3468997
+    }
+  }
+}

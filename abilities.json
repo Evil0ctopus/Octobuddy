@@ -1,0 +1,82 @@
+{
+  "ability_count": 4,
+  "abilities": {
+    "ability_0_1767489756": {
+      "ability_id": "ability_0_1767489756",
+      "name": "Observe Patterns",
+      "category": "observation",
+      "description": "Recognize patterns in user behavior and interactions",
+      "learned_at": 1767489756.3457446,
+      "proficiency": 0.3,
+      "prerequisites": [],
+      "parameters": {
+        "pattern_types": [
+          "timing",
+          "frequency",
+          "preferences"
+        ]
+      },
+      "usage_count": 0,
+      "last_used": 0.0,
+      "enabled": true
+    },
+    "ability_1_1767489756": {
+      "ability_id": "ability_1_1767489756",
+      "name": "Express Emotion",
+      "category": "expression",
+      "description": "Show emotions through animation and color changes",
+      "learned_at": 1767489756.3458965,
+      "proficiency": 0.5,
+      "prerequisites": [],
+      "parameters": {
+        "emotions": [
+          "happy",
+          "curious",
+          "calm",
+          "excited"
+        ]
+      },
+      "usage_count": 0,
+      "last_used": 0.0,
+      "enabled": true
+    },
+    "ability_2_1767489756": {
+      "ability_id": "ability_2_1767489756",
+      "name": "Remember Facts",
+      "category": "learning",
+      "description": "Store and recall important information",
+      "learned_at": 1767489756.346137,
+      "proficiency": 0.4,
+      "prerequisites": [],
+      "parameters": {
+        "memory_types": [
+          "facts",
+          "preferences",
+          "events"
+        ]
+      },
+      "usage_count": 0,
+      "last_used": 0.0,
+      "enabled": true
+    },
+    "ability_3_1767489756": {
+      "ability_id": "ability_3_1767489756",
+      "name": "Respond to Greetings",
+      "category": "interaction",
+      "description": "Generate appropriate greetings and responses",
+      "learned_at": 1767489756.3464592,
+      "proficiency": 0.6,
+      "prerequisites": [],
+      "parameters": {
+        "greeting_styles": [
+          "friendly",
+          "playful",
+          "formal"
+        ]
+      },
+      "usage_count": 0,
+      "last_used": 0.0,
+      "enabled": true
+    }
+  }
+}
