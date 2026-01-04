@@ -107,13 +107,8 @@ class OctoBuddyWindow(QWidget):
         
         # Make background transparent
         self.setAttribute(Qt.WA_TranslucentBackground)
-        
-        # Set window size from config
-        size = self.config.get("desktop", {}).get("window_size", 128)
-        self.setFixedSize(size, size + drop_zone_height + 80)
 
-        
-        # Create speech bubble label (positioned above sprite)
+         # Create speech bubble label (positioned above sprite)
         self.speech_label = QLabel(self)
         self.speech_label.setAlignment(Qt.AlignCenter)
         self.speech_label.setWordWrap(True)
@@ -171,6 +166,10 @@ class OctoBuddyWindow(QWidget):
         drop_zone_height = 45
         self.drop_zone.setGeometry(5, size + 5, size - 10, drop_zone_height)
         self.drop_label.setGeometry(0, 0, size - 10, drop_zone_height)
+
+        # Set window size from config
+        size = self.config.get("desktop", {}).get("window_size", 128)
+        self.setFixedSize(size, size + drop_zone_height + 80)
         
         # Resize window to accommodate drop zone
         self.setFixedSize(size, size + drop_zone_height + 10)
