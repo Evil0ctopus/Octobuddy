@@ -1,1 +1,4 @@
 pyyaml
+PyQt5>=5.15.0
+colorama
+Pillow>=9.0.0
