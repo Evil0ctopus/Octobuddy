@@ -110,7 +110,8 @@ class OctoBuddyWindow(QWidget):
         
         # Set window size from config
         size = self.config.get("desktop", {}).get("window_size", 128)
-        self.setFixedSize(size, size)
+        self.setFixedSize(size, size + drop_zone_height + 80)
+
         
         # Create speech bubble label (positioned above sprite)
         self.speech_label = QLabel(self)
